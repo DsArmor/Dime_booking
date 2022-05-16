@@ -1,4 +1,4 @@
-package com.dancompany.booking.model;
+package com.dancompany.booking.auth;
 
 import lombok.Data;
 
@@ -11,14 +11,19 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(name = "name")
-    String name;
+    private String name;
 
     @Column(name = "email")
-    String email;
+    private String email;
 
     @Column(name = "password")
-    String password;
+    private String password;
+
+    @Column(name = "role")
+    @Enumerated(value = EnumType.STRING)
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
+    private Role role;
 }

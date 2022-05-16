@@ -1,5 +1,6 @@
-package com.dancompany.booking.auth;
+package com.dancompany.booking.repository;
 
+import com.dancompany.booking.auth.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
