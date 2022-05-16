@@ -18,6 +18,15 @@ import java.time.LocalDateTime;
 public class Room {
 
     @Id
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "room_id_sequence"
+    )
+    @SequenceGenerator(
+            name = "room_id_sequence",
+            sequenceName = "room_id_sequence",
+            allocationSize = 1
+    )
     private Long id;
 
     @Column(name = "name")
@@ -29,10 +38,14 @@ public class Room {
     @Column(name = "day_price")
     private Long priceForDay;
 
-    @Column(name = "start_reserve")
+    @Column(name = "start_allocation")
     private LocalDateTime startAllocationDateTime;
 
-    @Column(name = "end_reserve")
+    @Column(name = "end_allocation")
     private LocalDateTime endAllocationDateTime;
+
+    @ManyToOne
+    @JoinColumn(name = "hotel_id", referencedColumnName = "id")
+    private Hotel owner;
 
 }

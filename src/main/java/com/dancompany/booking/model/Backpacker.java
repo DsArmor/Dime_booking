@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -19,8 +16,16 @@ import javax.persistence.Table;
 public class Backpacker {
 
     @Id
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "backpacker_id_sequence"
+    )
+    @SequenceGenerator(
+            name = "backpacker_id_sequence",
+            sequenceName = "backpacker_id_sequence",
+            allocationSize = 1
+    )
     private Long id;
-
     // this fields just to login, mb it is not a right way to duplicate
 
     @Column(name = "name")
@@ -35,6 +40,4 @@ public class Backpacker {
     @Column(name = "phone")
     private String phone;
     // mb add custom budget for user and allow to by some for inherit currency
-
-
 }

@@ -5,9 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,9 +17,28 @@ import java.time.LocalDateTime;
 public class Booking {
 
     @Id
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "booking_id_sequence"
+    )
+    @SequenceGenerator(
+            name = "booking_id_sequence",
+            sequenceName = "booking_id_sequence",
+            allocationSize = 1
+    )
     private Long id;
 
+    @Column(name = "start_reserve")
     private LocalDateTime startBookingDateTime;
+
+    @Column(name = "end_reserve")
     private LocalDateTime endBookingDateTime;
 
+    @ManyToOne
+    @JoinColumn(name = "backpacker_id", referencedColumnName = "id")
+    private Backpacker backpacker;
+
+    @ManyToOne
+    @JoinColumn(name = "room_id", referencedColumnName = "id")
+    private Room room;
 }

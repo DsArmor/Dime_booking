@@ -6,10 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -20,6 +17,15 @@ import javax.persistence.Table;
 public class Hotel {
 
     @Id
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "hotel_id_sequence"
+    )
+    @SequenceGenerator(
+            name = "hotel_id_sequence",
+            sequenceName = "hotel_id_sequence",
+            allocationSize = 1
+    )
     private Long id;
 
     // this fields just to login, mb it is not a right way to duplicate
@@ -38,7 +44,4 @@ public class Hotel {
 
     @Column(name = "description")
     private String description;
-
-
-
 }
