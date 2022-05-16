@@ -32,7 +32,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         userRepository.findByEmail(user.getEmail()).ifPresent(
                 (u) -> {throw new IllegalStateException(String.format("User with username %s exists", user.getEmail()));} // todo add custom exceptions
         );
-        System.out.println("what?");
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);

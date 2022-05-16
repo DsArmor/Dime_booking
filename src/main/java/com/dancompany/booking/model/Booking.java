@@ -41,4 +41,5 @@ public class Booking {
     @ManyToOne
     @JoinColumn(name = "room_id", referencedColumnName = "id")
     private Room room;
+
 }

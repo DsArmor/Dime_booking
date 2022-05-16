@@ -26,4 +26,5 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     private Role role;
+
 }
