@@ -1,15 +1,17 @@
-package com.dancompany.booking.model.dto.response;
+package com.dancompany.booking.model.dto.request;
 
+import com.dancompany.booking.model.dto.response.HotelResponse;
+import com.dancompany.booking.model.dto.response.RoomResponse;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.time.OffsetDateTime;
 
-public class RoomResponse {
-
-    @JsonProperty("id")
-    private Long id;
+public class RoomRequest {
 
     @JsonProperty("name")
     private String name;
@@ -28,52 +30,32 @@ public class RoomResponse {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private OffsetDateTime endAllocationDateTime;
 
-    @JsonProperty("owner")
-    private HotelResponse owner;
-
-    public RoomResponse id(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public RoomResponse name(String name) {
+    public RoomRequest name(String name) {
         this.name = name;
         return this;
     }
 
-    public RoomResponse description(String description) {
+    public RoomRequest description(String description) {
         this.description = description;
         return this;
     }
 
-    public RoomResponse priceForDay(Long priceForDay) {
+    public RoomRequest priceForDay(Long priceForDay) {
         this.priceForDay = priceForDay;
         return this;
     }
 
-    public RoomResponse startAllocationDateTime(OffsetDateTime startAllocationDateTime) {
+    public RoomRequest startAllocationDateTime(OffsetDateTime startAllocationDateTime) {
         this.startAllocationDateTime = startAllocationDateTime;
         return this;
     }
 
-    public RoomResponse endAllocationDateTime(OffsetDateTime endAllocationDateTime) {
+    public RoomRequest endAllocationDateTime(OffsetDateTime endAllocationDateTime) {
         this.endAllocationDateTime = endAllocationDateTime;
         return this;
     }
 
-    public RoomResponse owner(HotelResponse owner) {
-        this.owner = owner;
-        return this;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    @NotNull @Size(min = 1)
     public String getName() {
         return name;
     }
@@ -90,6 +72,7 @@ public class RoomResponse {
         this.description = description;
     }
 
+    @NotNull @Positive
     public Long getPriceForDay() {
         return priceForDay;
     }
@@ -98,6 +81,7 @@ public class RoomResponse {
         this.priceForDay = priceForDay;
     }
 
+    @NotNull @Valid
     public OffsetDateTime getStartAllocationDateTime() {
         return startAllocationDateTime;
     }
@@ -106,6 +90,7 @@ public class RoomResponse {
         this.startAllocationDateTime = startAllocationDateTime;
     }
 
+    @NotNull @Valid
     public OffsetDateTime getEndAllocationDateTime() {
         return endAllocationDateTime;
     }
@@ -113,12 +98,5 @@ public class RoomResponse {
     public void setEndAllocationDateTime(OffsetDateTime endAllocationDateTime) {
         this.endAllocationDateTime = endAllocationDateTime;
     }
-
-    public HotelResponse getOwner() {
-        return owner;
-    }
-
-    public void setOwner(HotelResponse owner) {
-        this.owner = owner;
-    }
 }
+

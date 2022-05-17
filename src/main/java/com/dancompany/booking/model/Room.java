@@ -44,7 +44,7 @@ public class Room {
     @Column(name = "end_allocation")
     private LocalDateTime endAllocationDateTime;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "hotel_id", referencedColumnName = "id")
     private Hotel owner;
 

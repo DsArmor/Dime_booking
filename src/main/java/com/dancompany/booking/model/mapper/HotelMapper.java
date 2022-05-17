@@ -3,7 +3,9 @@ package com.dancompany.booking.model.mapper;
 import com.dancompany.booking.model.Hotel;
 import com.dancompany.booking.model.dto.request.HotelRequest;
 import com.dancompany.booking.model.dto.response.HotelResponse;
+import org.springframework.stereotype.Component;
 
+@Component
 public class HotelMapper {
 
     public Hotel map(HotelRequest hotelRequest) {
