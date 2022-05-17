@@ -1,6 +1,8 @@
 package com.dancompany.booking.model.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -44,6 +46,8 @@ public class BackpackerRequest {
         return this;
     }
 
+    @NotNull
+    @Size(min = 3)
     public String getPassword() {
         return password;
     }
@@ -71,6 +75,7 @@ public class BackpackerRequest {
     }
     //  end name
 
+    //  start phone
     public BackpackerRequest phone(String phone) {
         this.phone = phone;
         return this;
@@ -83,7 +88,7 @@ public class BackpackerRequest {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
+    //  end phone
 
     @Override
     public boolean equals(Object o) {

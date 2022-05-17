@@ -6,8 +6,8 @@ import com.dancompany.booking.model.dto.response.BackpackerResponse;
 public interface BackpackerService {
 
     public Long createBackpacker(BackpackerRequest backpackerRequest);
-    public Long updateById(Long id, BackpackerRequest backpackerRequest);
+    public void updateById(Long id, BackpackerRequest backpackerRequest);
     public BackpackerResponse getById(Long id);
-    public Long deleteById(Long id);
+    public void deleteById(Long id);
 
 }

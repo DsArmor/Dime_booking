@@ -1,4 +1,4 @@
-package com.dancompany.booking.service;
+package com.dancompany.booking.service.implementation;
 
 import com.dancompany.booking.auth.ApplicationUser;
 import com.dancompany.booking.auth.User;

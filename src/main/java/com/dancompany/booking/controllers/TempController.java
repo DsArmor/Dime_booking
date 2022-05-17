@@ -1,7 +1,6 @@
 package com.dancompany.booking.controllers;
 
-import com.dancompany.booking.auth.User;
-import com.dancompany.booking.service.UserDetailsServiceImpl;
+import com.dancompany.booking.service.implementation.UserDetailsServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
