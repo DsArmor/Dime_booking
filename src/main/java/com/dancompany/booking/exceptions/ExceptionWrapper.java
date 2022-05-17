@@ -8,7 +8,7 @@ import java.util.function.*;
 
 @Slf4j
 public class ExceptionWrapper {
-    public static <T, R> ResponseEntity<?> wrap(Function<T, R> function, T arg) {
+    public static <T, R> ResponseEntity<R> wrap(Function<T, R> function, T arg) {
         try {
             return ResponseEntity.ok(function.apply(arg));
         } catch (NotFoundException e) {
@@ -16,7 +16,7 @@ public class ExceptionWrapper {
             return ResponseEntity.notFound().build();
         } catch (BadRequestException e) {
             log.error("Bad request", e);
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().build();
         } catch (Exception e) {
             log.error("Internal server error", e);
             return ResponseEntity.internalServerError().build();

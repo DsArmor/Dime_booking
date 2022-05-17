@@ -113,7 +113,7 @@ public class BackpackerRequest {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class UserRequest {\n");
+        sb.append("class BackpackerRequest {\n");
         sb.append("    email: ").append(toIndentedString(email)).append("\n");
         sb.append("    password: ").append(toIndentedString(password)).append("\n");
         sb.append("    name: ").append(toIndentedString(name)).append("\n");
