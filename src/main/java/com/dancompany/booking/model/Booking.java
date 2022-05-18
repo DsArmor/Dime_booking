@@ -34,11 +34,11 @@ public class Booking {
     @Column(name = "end_reserve")
     private LocalDateTime endBookingDateTime;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "backpacker_id", referencedColumnName = "id")
     private Backpacker backpacker;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // think about
     @JoinColumn(name = "room_id", referencedColumnName = "id")
     private Room room;
 

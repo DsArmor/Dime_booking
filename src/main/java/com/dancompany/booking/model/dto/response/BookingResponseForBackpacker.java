@@ -1,15 +1,18 @@
 package com.dancompany.booking.model.dto.response;
 
-import com.dancompany.booking.model.dto.request.BookingRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
-public class BookingResponse {
+public class BookingResponseForBackpacker {
 
     @JsonProperty("id")
     private Long id;
+
+    @JsonProperty("room")
+    private RoomResponse roomResponse;
 
     @JsonProperty("startBookingDateTime")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
@@ -19,17 +22,22 @@ public class BookingResponse {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private OffsetDateTime endBookingDateTime;
 
-    public BookingResponse id(Long id) {
+    public BookingResponseForBackpacker id(Long id) {
         this.id = id;
         return this;
     }
 
-    public BookingResponse startBookingDateTime(OffsetDateTime startBookingDateTime) {
+    public BookingResponseForBackpacker roomResponse(RoomResponse roomResponse) {
+        this.roomResponse = roomResponse;
+        return this;
+    }
+
+    public BookingResponseForBackpacker startBookingDateTime(OffsetDateTime startBookingDateTime) {
         this.startBookingDateTime = startBookingDateTime;
         return this;
     }
 
-    public BookingResponse endBookingDateTime(OffsetDateTime endBookingDateTime) {
+    public BookingResponseForBackpacker endBookingDateTime(OffsetDateTime endBookingDateTime) {
         this.endBookingDateTime = endBookingDateTime;
         return this;
     }
@@ -56,5 +64,13 @@ public class BookingResponse {
 
     public void setEndBookingDateTime(OffsetDateTime endBookingDateTime) {
         this.endBookingDateTime = endBookingDateTime;
+    }
+
+    public RoomResponse getRoomResponse() {
+        return roomResponse;
+    }
+
+    public void setRoomResponse(RoomResponse roomResponse) {
+        this.roomResponse = roomResponse;
     }
 }
