@@ -3,8 +3,10 @@ package com.dancompany.booking.controllers;
 import com.dancompany.booking.model.dto.request.HotelRequest;
 import com.dancompany.booking.model.dto.request.RoomRequest;
 import com.dancompany.booking.model.dto.response.BackpackerResponse;
+import com.dancompany.booking.model.dto.response.BookingResponseForHotel;
 import com.dancompany.booking.model.dto.response.HotelResponse;
 import com.dancompany.booking.service.BackpackerService;
+import com.dancompany.booking.service.BookingService;
 import com.dancompany.booking.service.HotelService;
 import com.dancompany.booking.service.RoomService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
+
+import java.util.List;
 
 import static com.dancompany.booking.exceptions.ExceptionWrapper.wrap;
 import static com.dancompany.booking.exceptions.ExceptionWrapper.wrapWithoutResult;
@@ -24,6 +28,7 @@ public class HotelController {
 
     private final HotelService hotelService;
     private final RoomService roomService;
+    private final BookingService bookingService;
 
     /* Hotel Rest methods */
     @RequestMapping(
@@ -93,5 +98,17 @@ public class HotelController {
     )
     public ResponseEntity<Void> deleteRoom(@Positive @PathVariable("hotelId") Long hotelId, @Positive @PathVariable("roomId") Long roomId) {
         return wrapWithoutResult(roomService::deleteById, hotelId, roomId);
+    }
+
+    /* Hotel-Room-Booking rest methods */
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/{hotelId}/room/{roomId}/booking",
+            produces = {"application/json"}
+    )
+    public ResponseEntity<List<BookingResponseForHotel>> getByRoomId(
+            @Positive @PathVariable("hotelId") Long hotelId,
+            @Positive @PathVariable("roomId") Long roomId) {
+        return wrap(bookingService::getByRoomId, roomId);
     }
 }

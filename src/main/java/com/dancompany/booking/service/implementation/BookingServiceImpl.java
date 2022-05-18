@@ -72,8 +72,8 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public List<BookingResponse> getByRoomIdAndBackpackerId(Long roomId, Long backpackerId) {
-        return bookingRepository.findByRoomIdAndBackpackerId(roomId, backpackerId)
+    public List<BookingResponse> getByBackpackerIdAndRoomId(Long backpackerId, Long roomId) {
+        return bookingRepository.findByBackpackerIdAndRoomId(backpackerId, roomId)
                 .stream()
                 .map(bookingMapper::map)
                 .collect(Collectors.toList());

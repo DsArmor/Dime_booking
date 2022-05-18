@@ -16,7 +16,7 @@ public interface BookingService {
     public void updateBooking(Long id, BookingRequest bookingRequest);
     public void deleteById(Long id);
     public List<BookingResponseForBackpacker> getByBackpackerId(Long id);
-    public List<BookingResponse> getByRoomIdAndBackpackerId(Long roomId, Long backpackerId);
+    public List<BookingResponse> getByBackpackerIdAndRoomId(Long roomId, Long backpackerId);
     /* For Hotel */
-    public List<BookingResponseForHotel> getByRoomId(Long id); // не возвращать id клиента
+    public List<BookingResponseForHotel> getByRoomId(Long id);
 }
