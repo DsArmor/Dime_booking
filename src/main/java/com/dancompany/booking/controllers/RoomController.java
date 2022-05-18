@@ -3,6 +3,7 @@ package com.dancompany.booking.controllers;
 import com.dancompany.booking.model.dto.request.HotelRequest;
 import com.dancompany.booking.model.dto.response.HotelResponse;
 import com.dancompany.booking.model.dto.response.RoomResponse;
+import com.dancompany.booking.model.dto.response.TimeResponse;
 import com.dancompany.booking.service.HotelService;
 import com.dancompany.booking.service.RoomService;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +27,7 @@ public class RoomController {
 
     @RequestMapping(
             method = RequestMethod.GET,
-            produces = {"application/json"},
-            consumes = {"application/json"}
+            produces = {"application/json"}
     )
     public ResponseEntity<List<RoomResponse>> getAllRoom() {
         return wrap(roomService::getAll);
@@ -36,8 +36,7 @@ public class RoomController {
     @RequestMapping(
             method = RequestMethod.GET,
             value = "/{roomId}",
-            produces = {"application/json"},
-            consumes = {"application/json"}
+            produces = {"application/json"}
     )
     public ResponseEntity<RoomResponse> getRoomById(@Positive @PathVariable("roomId") Long id) {
         return wrap(roomService::getById, id);
@@ -45,14 +44,20 @@ public class RoomController {
 
     @RequestMapping(
             method = RequestMethod.GET,
-            value = "/{hotelId}",
-            produces = {"application/json"},
-            consumes = {"application/json"}
+            value = "hotel/{hotelId}",
+            produces = {"application/json"}
     )
     public ResponseEntity<List<RoomResponse>> getByHotelId(@Positive @PathVariable("hotelId") Long id) {
         return wrap(roomService::getByHotelId, id);
     }
 
     //TODO: add getfreetime rest method
-
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "{roomId}/times",
+            produces = {"application/json"}
+    )
+    public ResponseEntity<List<TimeResponse>> getTimes(@Positive @PathVariable("roomId") Long id) {
+        return wrap(roomService::getFreeTimeIntervalsById, id);
+    }
 }

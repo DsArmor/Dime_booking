@@ -2,6 +2,7 @@ package com.dancompany.booking.service;
 
 import com.dancompany.booking.model.dto.request.RoomRequest;
 import com.dancompany.booking.model.dto.response.RoomResponse;
+import com.dancompany.booking.model.dto.response.TimeResponse;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,6 +16,6 @@ public interface RoomService {
     public RoomResponse getById(Long id);
     public void deleteById(Long hotelId, Long roomId);
     public void updateById(Long hotelId, Long roomId, RoomRequest roomRequest);
-    public TreeMap<LocalDateTime, Integer> getFreeTimeIntervalsById(Long id);
+    public List<TimeResponse> getFreeTimeIntervalsById(Long id);
 
 }

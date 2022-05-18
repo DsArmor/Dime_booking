@@ -12,4 +12,6 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     public Room findByIdAndOwnerId(Long roomId, Long hotelId);
 
     public void deleteByIdAndOwnerId(Long roomId, Long hotelId);
+
+    public boolean existsRoomByNameAndOwnerId(String name, Long id);
 }

@@ -75,7 +75,9 @@ public class HotelController {
             value = "/{hotelId}/room",
             produces = {"application/json"}
     )
-    public ResponseEntity<Object> createRoom(@Positive @PathVariable("hotelId") Long id, @RequestBody RoomRequest roomRequest) {
+    public ResponseEntity<Object> createRoom(
+            @Positive @PathVariable("hotelId") Long id,
+            @RequestBody RoomRequest roomRequest) {
         return wrap(roomService::createRoom, id, roomRequest);
     }
 

@@ -73,7 +73,7 @@ public class BackpackerController {
     /* Backpacker-Booking Rest methods */
     @RequestMapping(
             method = RequestMethod.POST,
-            value = "/{backpackerId}/booking/{roomId}",
+            value = "/{backpackerId}/room/{roomId}/booking",
             produces = { "application/json" }
     )
     public ResponseEntity<Object> createBooking(
@@ -85,7 +85,7 @@ public class BackpackerController {
 
     @RequestMapping(
             method = RequestMethod.PUT,
-            value = "/{backpackerId}/booking/{roomId}/{bookingId}",
+            value = "/{backpackerId}/room/{roomId}/booking/{bookingId}",
             produces = { "application/json" }
     )
     public ResponseEntity<Void> updateBooking(
@@ -98,14 +98,13 @@ public class BackpackerController {
 
     @RequestMapping(
             method = RequestMethod.DELETE,
-            value = "/{backpackerId}/booking/{roomId}/{bookingId}",
+            value = "/{backpackerId}/room/{roomId}/booking/{bookingId}",
             produces = { "application/json" }
     )
     public ResponseEntity<Void> deleteBooking(
             @Positive @PathVariable("backpackerId") Long backpackerId,
             @Positive @PathVariable("roomId") Long roomId,
-            @Positive @PathVariable("bookingId") Long bookingId,
-            @RequestBody BookingRequest bookingRequest) {
+            @Positive @PathVariable("bookingId") Long bookingId) {
         return wrapWithoutResult(bookingService::deleteById, bookingId);
     }
 
@@ -121,7 +120,7 @@ public class BackpackerController {
 
     @RequestMapping(
             method = RequestMethod.GET,
-            value = "/{backpackerId}/booking/{roomId}",
+            value = "/{backpackerId}/room/{roomId}/booking",
             produces = { "application/json" }
     )
     public ResponseEntity<List<BookingResponse>> getByBackpackerIdAndRoomId(
