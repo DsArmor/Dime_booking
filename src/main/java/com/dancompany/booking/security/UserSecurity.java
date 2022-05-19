@@ -22,6 +22,7 @@ public class UserSecurity {
         } else {
             username = principal.toString();
         }
+        userDetailsService.getUserById(id);
         return userDetailsService.getUserById(id).getEmail().equals(username);
     }
 }

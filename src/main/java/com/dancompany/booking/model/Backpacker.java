@@ -22,10 +22,6 @@ public class Backpacker {
     @Column(name = "name")
     private String name;
 
-    //delete
-    @Column(name = "email")
-    private String email;
-
     @Column(name = "phone")
     private String phone;
 

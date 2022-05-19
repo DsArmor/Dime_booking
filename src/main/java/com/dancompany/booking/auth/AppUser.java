@@ -34,16 +34,9 @@ public class AppUser implements UserDetails{
 
     @Column(name = "password")
     private String password;
+
     @Enumerated(EnumType.STRING)
     private Role appRole;
-//
-//    public AppUser(String email,
-//                   String password,
-//                   Role appRole) {
-//        this.email = email;
-//        this.password = password;
-//        this.appRole = appRole;
-//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -82,14 +75,4 @@ public class AppUser implements UserDetails{
         return true;
     }
 
-//    public static UserDetails fromUser(User user) {
-//        return new org.springframework.security.core.userdetails.User(
-//                user.getEmail(), user.getPassword(),
-//                true,
-//                true,
-//                true,
-//                true,
-//                user.getRole().getAuthorities()
-//        );
-//    }
 }

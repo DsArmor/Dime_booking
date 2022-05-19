@@ -6,6 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BackpackerRepository extends JpaRepository<Backpacker, Long> {
-
-    public boolean existsByEmail(String email);
 }

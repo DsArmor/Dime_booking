@@ -33,7 +33,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     public AppUser getUserById(Long id) {
-        return userRepository.getById(id);
+        return userRepository.findById(id)
+                .orElseThrow(() -> new UsernameNotFoundException("Incorrect user id"));
     }
 
     /* registration */
