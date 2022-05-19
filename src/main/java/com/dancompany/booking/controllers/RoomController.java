@@ -51,7 +51,6 @@ public class RoomController {
         return wrap(roomService::getByHotelId, id);
     }
 
-    //TODO: add getfreetime rest method
     @RequestMapping(
             method = RequestMethod.GET,
             value = "{roomId}/times",

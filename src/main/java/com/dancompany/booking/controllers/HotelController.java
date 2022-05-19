@@ -31,14 +31,14 @@ public class HotelController {
     private final BookingService bookingService;
 
     /* Hotel Rest methods */
-    @RequestMapping(
-            method = RequestMethod.POST,
-            produces = {"application/json"},
-            consumes = {"application/json"}
-    )
-    public ResponseEntity<?> createHotel(@Valid @RequestBody HotelRequest hotelRequest) {
-        return wrap(hotelService::createHotel, hotelRequest);
-    }
+//    @RequestMapping(
+//            method = RequestMethod.POST,
+//            produces = {"application/json"},
+//            consumes = {"application/json"}
+//    )
+//    public ResponseEntity<?> createHotel(@Valid @RequestBody HotelRequest hotelRequest) {
+//        return wrap(hotelService::createHotel, hotelRequest);
+//    }
 
     @RequestMapping(
             method = RequestMethod.PUT,

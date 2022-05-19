@@ -1,5 +1,6 @@
 package com.dancompany.booking.service.implementation;
 
+import com.dancompany.booking.auth.AppUser;
 import com.dancompany.booking.auth.ApplicationUser;
 import com.dancompany.booking.auth.User;
 import com.dancompany.booking.repository.UserRepository;
@@ -10,7 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@Service("userDetailsServiceImpl")
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
@@ -23,18 +24,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email)
+        return userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Incorrect email"));
-        return ApplicationUser.fromUser(user);
     }
 
-    public String signUp(User user) {
-        userRepository.findByEmail(user.getEmail()).ifPresent(
-                (u) -> {throw new IllegalStateException(String.format("User with username %s exists", user.getEmail()));} // todo add custom exceptions
+    public String signUp(AppUser appUser) {
+        userRepository.findByEmail(appUser.getEmail()).ifPresent(
+                (u) -> {throw new IllegalStateException(String.format("User with username %s exists", appUser.getEmail()));} // todo add custom exceptions
         );
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+        appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
+        userRepository.save(appUser);
         return "login";
     }
 }

@@ -1,29 +1,54 @@
 package com.dancompany.booking.controllers;
 
+import com.dancompany.booking.auth.AppUser;
 import com.dancompany.booking.auth.User;
+import com.dancompany.booking.model.dto.request.BackpackerRequest;
+import com.dancompany.booking.model.dto.request.HotelRequest;
+import com.dancompany.booking.service.BackpackerService;
+import com.dancompany.booking.service.HotelService;
 import com.dancompany.booking.service.implementation.UserDetailsServiceImpl;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+import javax.validation.Valid;
+
+import static com.dancompany.booking.exceptions.ExceptionWrapper.wrap;
+
+@RestController
 @RequestMapping("/registration")
+@RequiredArgsConstructor
 public class RegistrationController {
 
     private final UserDetailsServiceImpl userDetailsServiceImpl;
+    private final HotelService hotelService;
+    private final BackpackerService backpackerService;
 
-    public RegistrationController(UserDetailsServiceImpl userDetailsServiceImpl) {
-        this.userDetailsServiceImpl = userDetailsServiceImpl;
+//    @GetMapping
+//    public String registration(@RequestBody AppUser appUser) {
+//        return "registration";
+//    }
+
+    @RequestMapping(
+            method = RequestMethod.POST,
+            value =  "/hotel",
+            produces = {"application/json"},
+            consumes = {"application/json"}
+    )
+    public ResponseEntity<?> createHotel(@Valid @RequestBody HotelRequest hotelRequest) {
+        return wrap(hotelService::createHotel, hotelRequest);
     }
 
-    @GetMapping
-    public String registration(@ModelAttribute("user") User user) {
-        return "registration";
-    }
-
-    @PostMapping
-    public String addUser(@RequestBody User user) {
-        System.out.println(user.toString());
-        return userDetailsServiceImpl.signUp(user);
+    @RequestMapping(
+            method = RequestMethod.POST,
+            value = "/backpacker",
+            produces = { "application/json" },
+            consumes = { "application/json" }
+    )
+    public ResponseEntity<?> createBackpacker(@Valid @RequestBody BackpackerRequest backpackerRequest) {
+        return wrap(backpackerService::createBackpacker, backpackerRequest);
     }
 
 }
