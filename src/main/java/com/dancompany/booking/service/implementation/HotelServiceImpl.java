@@ -35,12 +35,11 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public void updateById(Long id, HotelRequest hotelRequest) {
-//        if (hotelRepository.existsByEmail(hotelRequest.getEmail())) {
-//            throw new BadRequestException("This email exists");
-//        }
-//        Hotel hotel = hotelMapper.map(hotelRequest);
-//        hotel.setId(id);
-//        hotelRepository.save(hotel);
+        AppUser user = appUserMapper.map(hotelRequest);
+        userDetailsService.updateUser(id, user);
+        Hotel hotel = hotelMapper.map(user, hotelRequest);
+        hotel.setId(id);
+        hotelRepository.save(hotel);
     }
 
     @Override

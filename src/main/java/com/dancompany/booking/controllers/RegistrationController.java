@@ -1,7 +1,6 @@
 package com.dancompany.booking.controllers;
 
 import com.dancompany.booking.auth.AppUser;
-import com.dancompany.booking.auth.User;
 import com.dancompany.booking.model.dto.request.BackpackerRequest;
 import com.dancompany.booking.model.dto.request.HotelRequest;
 import com.dancompany.booking.service.BackpackerService;

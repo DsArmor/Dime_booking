@@ -39,12 +39,11 @@ public class BackpackerServiceImpl implements BackpackerService {
 
     @Override
     public void updateById(Long id, BackpackerRequest backpackerRequest) {
-//        if (backpackerRepository.existsByEmail(backpackerRequest.getEmail())) {
-//            throw new BadRequestException("This email exists");
-//        }
-//        Backpacker backpacker = backpackerMapper.map(backpackerRequest);
-//        backpacker.setId(id);
-//        backpackerRepository.save(backpacker);
+        AppUser user = appUserMapper.map(backpackerRequest);
+        userDetailsService.updateUser(id, user);
+        Backpacker backpacker = backpackerMapper.map(user, backpackerRequest);
+        backpacker.setId(id);
+        backpackerRepository.save(backpacker);
     }
 
     @Override

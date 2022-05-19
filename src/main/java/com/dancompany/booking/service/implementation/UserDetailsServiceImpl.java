@@ -1,7 +1,6 @@
 package com.dancompany.booking.service.implementation;
 
 import com.dancompany.booking.auth.AppUser;
-import com.dancompany.booking.auth.User;
 import com.dancompany.booking.exceptions.BadRequestException;
 import com.dancompany.booking.repository.UserRepository;
 import com.dancompany.booking.security.PasswordConfig;
@@ -26,6 +25,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     /* login */
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return userRepository.findByEmail(email)
@@ -38,12 +38,24 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     /* registration */
-    public String signUp(AppUser appUser) {
+
+    public void signUp(AppUser appUser) {
         if (userRepository.existsByEmail(appUser.getEmail())) {
             throw new BadRequestException("This email exists");
         }
         appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
         userRepository.save(appUser);
-        return "login";
+    }
+
+    /* Crud methods */
+
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    public void updateUser(Long id, AppUser user) {
+        user.setId(id);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
     }
 }
