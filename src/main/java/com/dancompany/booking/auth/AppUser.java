@@ -9,14 +9,13 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
 
-@Getter
-@Setter
-@EqualsAndHashCode
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Builder
 @Table(name = "app_user")
-public class AppUser implements UserDetails {
+public class AppUser implements UserDetails{
 
     @Id
     @GeneratedValue(
@@ -30,23 +29,21 @@ public class AppUser implements UserDetails {
     )
     private Long id;
 
-    @Column("email")
+    @Column(name = "email")
     private String email;
 
-    @Column("password")
+    @Column(name = "password")
     private String password;
     @Enumerated(EnumType.STRING)
     private Role appRole;
-
-
-
-    public AppUser(String email,
-                   String password,
-                   Role appRole) {
-        this.email = email;
-        this.password = password;
-        this.appRole = appRole;
-    }
+//
+//    public AppUser(String email,
+//                   String password,
+//                   Role appRole) {
+//        this.email = email;
+//        this.password = password;
+//        this.appRole = appRole;
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

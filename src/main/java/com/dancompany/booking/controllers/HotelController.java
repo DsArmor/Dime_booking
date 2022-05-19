@@ -31,14 +31,6 @@ public class HotelController {
     private final BookingService bookingService;
 
     /* Hotel Rest methods */
-//    @RequestMapping(
-//            method = RequestMethod.POST,
-//            produces = {"application/json"},
-//            consumes = {"application/json"}
-//    )
-//    public ResponseEntity<?> createHotel(@Valid @RequestBody HotelRequest hotelRequest) {
-//        return wrap(hotelService::createHotel, hotelRequest);
-//    }
 
     @RequestMapping(
             method = RequestMethod.PUT,
@@ -103,6 +95,7 @@ public class HotelController {
     }
 
     /* Hotel-Room-Booking rest methods */
+
     @RequestMapping(
             method = RequestMethod.GET,
             value = "/{hotelId}/room/{roomId}/booking",

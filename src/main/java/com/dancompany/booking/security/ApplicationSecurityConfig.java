@@ -17,7 +17,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -29,6 +28,10 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                     .antMatchers("/", "/registration/**", "/room/**").permitAll()
+                    .antMatchers("/hotel/{hotelId}/**")
+                        .access("@userSecurity.hasUserId(authentication, #hotelId) and hasAuthority('HOTEL')")
+                    .antMatchers("/backpacker/{backpackerId}/**")
+                        .access("@userSecurity.hasUserId(authentication, #backpackerId) and hasAuthority('USER')")
                     .anyRequest().authenticated()
                 .and()
                     .httpBasic()

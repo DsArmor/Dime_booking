@@ -1,5 +1,6 @@
 package com.dancompany.booking.model;
 
+import com.dancompany.booking.auth.AppUser;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,28 +17,21 @@ import javax.persistence.*;
 public class Backpacker {
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "backpacker_id_sequence"
-    )
-    @SequenceGenerator(
-            name = "backpacker_id_sequence",
-            sequenceName = "backpacker_id_sequence",
-            allocationSize = 1
-    )
     private Long id;
-    // this fields just to login, mb it is not a right way to duplicate
 
     @Column(name = "name")
     private String name;
 
+    //delete
     @Column(name = "email")
     private String email;
 
-    @Column(name = "password")
-    private String password;
-
     @Column(name = "phone")
     private String phone;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    @JoinColumn(name = "id")
+    private AppUser appUser;
     // mb add custom budget for user and allow to by some for inherit currency
 }

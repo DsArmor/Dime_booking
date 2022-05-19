@@ -31,14 +31,6 @@ public class BackpackerController {
     private final BookingService bookingService;
 
     /* Backpacker Rest methods */
-//    @RequestMapping(
-//            method = RequestMethod.POST,
-//            produces = { "application/json" },
-//            consumes = { "application/json" }
-//    )
-//    public ResponseEntity<?> createBackpacker(@Valid @RequestBody BackpackerRequest backpackerRequest) {
-//        return wrap(backpackerService::createBackpacker, backpackerRequest);
-//    }
 
     @RequestMapping(
             method = RequestMethod.PUT,
@@ -71,6 +63,7 @@ public class BackpackerController {
     }
 
     /* Backpacker-Booking Rest methods */
+    
     @RequestMapping(
             method = RequestMethod.POST,
             value = "/{backpackerId}/room/{roomId}/booking",

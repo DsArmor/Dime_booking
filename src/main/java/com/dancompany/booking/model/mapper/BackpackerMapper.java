@@ -12,8 +12,8 @@ public class BackpackerMapper {
     public Backpacker map(BackpackerRequest request) {
         return Backpacker.builder()
                 .name(request.getName())
-                .email(request.getEmail())
-                .password(request.getPassword())
+//                .email(request.getEmail())
+//                .password(request.getPassword())
                 .phone(request.getPhone())
                 .build();
     }
@@ -21,7 +21,7 @@ public class BackpackerMapper {
     public BackpackerResponse map(Backpacker backpacker) {
         return new BackpackerResponse()
                 .id(backpacker.getId())
-                .email(backpacker.getEmail())
+//                .email(backpacker.getEmail())
                 .name(backpacker.getName())
                 .phone(backpacker.getPhone());
     }

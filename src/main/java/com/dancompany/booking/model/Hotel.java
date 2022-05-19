@@ -20,8 +20,6 @@ public class Hotel {
     @Id
     private Long id;
 
-    // this fields just to login, mb it is not a right way to duplicate
-
     @Column(name = "name")
     private String name;
 
@@ -31,7 +29,7 @@ public class Hotel {
     @Column(name = "description")
     private String description;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     @JoinColumn(name = "id")
     private AppUser appUser;

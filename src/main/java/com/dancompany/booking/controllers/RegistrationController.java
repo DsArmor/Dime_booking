@@ -22,14 +22,8 @@ import static com.dancompany.booking.exceptions.ExceptionWrapper.wrap;
 @RequiredArgsConstructor
 public class RegistrationController {
 
-    private final UserDetailsServiceImpl userDetailsServiceImpl;
     private final HotelService hotelService;
     private final BackpackerService backpackerService;
-
-//    @GetMapping
-//    public String registration(@RequestBody AppUser appUser) {
-//        return "registration";
-//    }
 
     @RequestMapping(
             method = RequestMethod.POST,

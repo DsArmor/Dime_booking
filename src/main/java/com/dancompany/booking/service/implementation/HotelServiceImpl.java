@@ -21,30 +21,26 @@ public class HotelServiceImpl implements HotelService {
     private final UserDetailsServiceImpl userDetailsService;
 
     private final HotelRepository hotelRepository;
-    private final UserRepository userRepository;
     private final HotelMapper hotelMapper;
     private final AppUserMapper appUserMapper;
 
     @Override
     public Long createHotel(HotelRequest hotelRequest) {
-        if (userRepository.existsByEmail(hotelRequest.getEmail())) {
-            throw new BadRequestException("This email exists");
-        }
-        Hotel hotel = hotelMapper.map(hotelRequest);
-        hotelRepository.save(hotel);
         AppUser user = appUserMapper.map(hotelRequest);
         userDetailsService.signUp(user);
+        Hotel hotel = hotelMapper.map(user, hotelRequest);
+        hotelRepository.save(hotel);
         return hotel.getId();
     }
 
     @Override
     public void updateById(Long id, HotelRequest hotelRequest) {
-        if (hotelRepository.existsByEmail(hotelRequest.getEmail())) {
-            throw new BadRequestException("This email exists");
-        }
-        Hotel hotel = hotelMapper.map(hotelRequest);
-        hotel.setId(id);
-        hotelRepository.save(hotel);
+//        if (hotelRepository.existsByEmail(hotelRequest.getEmail())) {
+//            throw new BadRequestException("This email exists");
+//        }
+//        Hotel hotel = hotelMapper.map(hotelRequest);
+//        hotel.setId(id);
+//        hotelRepository.save(hotel);
     }
 
     @Override
