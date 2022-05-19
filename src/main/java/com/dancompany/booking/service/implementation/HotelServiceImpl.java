@@ -14,6 +14,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class HotelServiceImpl implements HotelService {
@@ -45,6 +48,14 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public HotelResponse getById(Long id) {
         return hotelMapper.map(hotelRepository.getById(id));
+    }
+
+    @Override
+    public List<HotelResponse> getAll() {
+        return hotelRepository.findAll()
+                .stream()
+                .map(hotelMapper::map)
+                .collect(Collectors.toList());
     }
 
     @Override

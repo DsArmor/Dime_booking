@@ -33,6 +33,14 @@ public class HotelController {
     /* Hotel Rest methods */
 
     @RequestMapping(
+            method = RequestMethod.GET,
+            produces = {"application/json"}
+    )
+    public ResponseEntity<List<HotelResponse>> getAll() {
+        return wrap(hotelService::getAll);
+    }
+
+    @RequestMapping(
             method = RequestMethod.PUT,
             value = "/{hotelId}",
             produces = {"application/json"},
@@ -90,7 +98,9 @@ public class HotelController {
             value = "/{hotelId}/room/{roomId}",
             produces = {"application/json"}
     )
-    public ResponseEntity<Void> deleteRoom(@Positive @PathVariable("hotelId") Long hotelId, @Positive @PathVariable("roomId") Long roomId) {
+    public ResponseEntity<Void> deleteRoom(
+            @Positive @PathVariable("hotelId") Long hotelId,
+            @Positive @PathVariable("roomId") Long roomId) {
         return wrapWithoutResult(roomService::deleteById, hotelId, roomId);
     }
 
@@ -104,6 +114,6 @@ public class HotelController {
     public ResponseEntity<List<BookingResponseForHotel>> getByRoomId(
             @Positive @PathVariable("hotelId") Long hotelId,
             @Positive @PathVariable("roomId") Long roomId) {
-        return wrap(bookingService::getByRoomId, roomId);
+        return wrap(bookingService::getByRoomId, hotelId, roomId);
     }
 }

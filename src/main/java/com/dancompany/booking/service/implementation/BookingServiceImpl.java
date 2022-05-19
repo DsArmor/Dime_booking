@@ -10,6 +10,7 @@ import com.dancompany.booking.model.dto.response.TimeResponse;
 import com.dancompany.booking.model.mapper.BookingMapper;
 import com.dancompany.booking.repository.BackpackerRepository;
 import com.dancompany.booking.repository.BookingRepository;
+import com.dancompany.booking.repository.HotelRepository;
 import com.dancompany.booking.repository.RoomRepository;
 import com.dancompany.booking.service.BookingService;
 import com.dancompany.booking.service.RoomService;
@@ -26,6 +27,7 @@ public class BookingServiceImpl implements BookingService {
 
     private final BookingRepository bookingRepository;
     private final BackpackerRepository backpackerRepository;
+    private final HotelRepository hotelRepository;
     private final RoomRepository roomRepository;
     private final BookingMapper bookingMapper;
     private final RoomService roomService;
@@ -48,8 +50,10 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public void updateBooking(Long id, BookingRequest bookingRequest) {
-        Booking oldBooking = bookingRepository.getById(id);
+    public void updateBooking(Long backpackerId, Long bookingId, BookingRequest bookingRequest) {
+        if (!bookingRepository.findByBackpackerId(backpackerId).contains(bookingRepository.getById(bookingId)))
+            throw new BadRequestException("Permission denied");
+        Booking oldBooking = bookingRepository.getById(bookingId);
         validDate(bookingRequest.getStartBookingDateTime().toLocalDateTime(),
                 bookingRequest.getEndBookingDateTime().toLocalDateTime(),
                 oldBooking.getRoom().getStartAllocationDateTime(),
@@ -61,18 +65,22 @@ public class BookingServiceImpl implements BookingService {
                 oldBooking.getBackpacker(),
                 oldBooking.getRoom(),
                 bookingRequest);
-        booking.setId(id);
+        booking.setId(bookingId);
         bookingRepository.save(booking);
     }
 
     @Override
-    public void deleteById(Long id) {
-        bookingRepository.deleteById(id);
+    public void deleteById(Long backpackerId, Long bookingId) {
+        if (!bookingRepository.findByBackpackerId(backpackerId).contains(bookingRepository.getById(bookingId)))
+            throw new BadRequestException("Permission denied");
+        bookingRepository.deleteById(bookingId);
     }
 
     @Override
-    public List<BookingResponseForHotel> getByRoomId(Long id) {
-        return bookingRepository.findByRoomId(id)
+    public List<BookingResponseForHotel> getByRoomId(Long hotelId, Long roomId) {
+        if (!roomRepository.findRoomByOwnerId(hotelId).contains(roomRepository.getById(roomId)))
+            throw new BadRequestException("Permission denied");
+        return bookingRepository.findByRoomId(roomId)
                 .stream()
                 .map(bookingMapper::mapForHotel)
                 .collect(Collectors.toList());

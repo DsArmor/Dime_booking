@@ -7,16 +7,12 @@ import com.dancompany.booking.model.dto.response.BookingResponse;
 import com.dancompany.booking.model.dto.response.BookingResponseForBackpacker;
 import com.dancompany.booking.service.BackpackerService;
 import com.dancompany.booking.service.BookingService;
-import com.dancompany.booking.service.implementation.BackpackerServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
-
 import java.util.List;
 
 import static com.dancompany.booking.exceptions.ExceptionWrapper.wrap;
@@ -63,7 +59,7 @@ public class BackpackerController {
     }
 
     /* Backpacker-Booking Rest methods */
-    
+
     @RequestMapping(
             method = RequestMethod.POST,
             value = "/{backpackerId}/room/{roomId}/booking",
@@ -86,7 +82,7 @@ public class BackpackerController {
             @Positive @PathVariable("roomId") Long roomId,
             @Positive @PathVariable("bookingId") Long bookingId,
             @RequestBody BookingRequest bookingRequest) {
-        return wrapWithoutResult(bookingService::updateBooking, bookingId, bookingRequest);
+        return wrapWithoutResult(bookingService::updateBooking, backpackerId, bookingId, bookingRequest);
     }
 
     @RequestMapping(
@@ -98,7 +94,7 @@ public class BackpackerController {
             @Positive @PathVariable("backpackerId") Long backpackerId,
             @Positive @PathVariable("roomId") Long roomId,
             @Positive @PathVariable("bookingId") Long bookingId) {
-        return wrapWithoutResult(bookingService::deleteById, bookingId);
+        return wrapWithoutResult(bookingService::deleteById, backpackerId, bookingId);
     }
 
     @RequestMapping(
