@@ -1,31 +1,44 @@
 package com.dancompany.booking.auth;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Set;
 
 @Getter
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
 @Entity
+@Builder
+@Table(name = "app_user")
 public class AppUser implements UserDetails {
 
     @Id
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "user_id_sequence"
+    )
+    @SequenceGenerator(
+            name = "user_id_sequence",
+            sequenceName = "user_id_sequence",
+            allocationSize = 1
+    )
     private Long id;
+
+    @Column("email")
     private String email;
+
+    @Column("password")
     private String password;
+    @Enumerated(EnumType.STRING)
     private Role appRole;
+
+
 
     public AppUser(String email,
                    String password,

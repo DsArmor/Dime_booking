@@ -22,17 +22,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    /* login */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Incorrect email"));
     }
 
+    /* registration */
     public String signUp(AppUser appUser) {
-        userRepository.findByEmail(appUser.getEmail()).ifPresent(
-                (u) -> {throw new IllegalStateException(String.format("User with username %s exists", appUser.getEmail()));} // todo add custom exceptions
-        );
-
         appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
         userRepository.save(appUser);
         return "login";
