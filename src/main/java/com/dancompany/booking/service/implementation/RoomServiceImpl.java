@@ -32,7 +32,8 @@ public class RoomServiceImpl implements RoomService {
     private final TimeMapper timeMapper;
 
     @Override
-    public Long createRoom(Long hotelId, RoomRequest roomRequest) {
+    public Long createRoom(Long hotelId, RoomRequest roomRequest) throws BadRequestException{
+        validDate(roomRequest.getStartAllocationDateTime(), roomRequest.getEndAllocationDateTime());
         if (roomRepository.existsRoomByNameAndOwnerId(roomRequest.getName(), hotelId))
             throw new BadRequestException("This name is exists");
         Room room = roomMapper.map(roomRequest, hotelRepository.getById(hotelId));
@@ -80,5 +81,11 @@ public class RoomServiceImpl implements RoomService {
                 .stream()
                 .map(timeMapper::map)
                 .collect(Collectors.toList());
+    }
+
+    private void validDate(LocalDateTime startRoom, LocalDateTime endRoom) {
+        if (startRoom.isAfter(endRoom)) {
+            throw new BadRequestException("The start time cannot be later than the end time");
+        }
     }
 }

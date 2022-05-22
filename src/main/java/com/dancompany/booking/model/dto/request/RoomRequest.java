@@ -3,12 +3,14 @@ package com.dancompany.booking.model.dto.request;
 import com.dancompany.booking.model.dto.response.HotelResponse;
 import com.dancompany.booking.model.dto.response.RoomResponse;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.cglib.core.Local;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 public class RoomRequest {
@@ -24,11 +26,11 @@ public class RoomRequest {
 
     @JsonProperty("startAllocationDateTime")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private OffsetDateTime startAllocationDateTime;
+    private LocalDateTime startAllocationDateTime;
 
     @JsonProperty("endAllocationDateTime")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private OffsetDateTime endAllocationDateTime;
+    private LocalDateTime endAllocationDateTime;
 
     public RoomRequest name(String name) {
         this.name = name;
@@ -45,12 +47,12 @@ public class RoomRequest {
         return this;
     }
 
-    public RoomRequest startAllocationDateTime(OffsetDateTime startAllocationDateTime) {
+    public RoomRequest startAllocationDateTime(LocalDateTime startAllocationDateTime) {
         this.startAllocationDateTime = startAllocationDateTime;
         return this;
     }
 
-    public RoomRequest endAllocationDateTime(OffsetDateTime endAllocationDateTime) {
+    public RoomRequest endAllocationDateTime(LocalDateTime endAllocationDateTime) {
         this.endAllocationDateTime = endAllocationDateTime;
         return this;
     }
@@ -82,20 +84,20 @@ public class RoomRequest {
     }
 
     @NotNull @Valid
-    public OffsetDateTime getStartAllocationDateTime() {
+    public LocalDateTime getStartAllocationDateTime() {
         return startAllocationDateTime;
     }
 
-    public void setStartAllocationDateTime(OffsetDateTime startAllocationDateTime) {
+    public void setStartAllocationDateTime(LocalDateTime startAllocationDateTime) {
         this.startAllocationDateTime = startAllocationDateTime;
     }
 
     @NotNull @Valid
-    public OffsetDateTime getEndAllocationDateTime() {
+    public LocalDateTime getEndAllocationDateTime() {
         return endAllocationDateTime;
     }
 
-    public void setEndAllocationDateTime(OffsetDateTime endAllocationDateTime) {
+    public void setEndAllocationDateTime(LocalDateTime endAllocationDateTime) {
         this.endAllocationDateTime = endAllocationDateTime;
     }
 }

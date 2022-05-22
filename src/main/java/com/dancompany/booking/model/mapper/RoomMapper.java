@@ -32,8 +32,8 @@ public class RoomMapper {
                 .name(roomRequest.getName())
                 .description(roomRequest.getDescription())
                 .priceForDay(roomRequest.getPriceForDay())
-                .startAllocationDateTime(roomRequest.getStartAllocationDateTime().toLocalDateTime())
-                .endAllocationDateTime(roomRequest.getEndAllocationDateTime().toLocalDateTime())
+                .startAllocationDateTime(roomRequest.getStartAllocationDateTime())
+                .endAllocationDateTime(roomRequest.getEndAllocationDateTime())
                 .owner(owner)
                 .build();
     }
