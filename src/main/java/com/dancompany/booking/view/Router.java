@@ -17,35 +17,6 @@ public class Router {
                         .page(HotelRoomPage.class)
                         .name("Комнаты")
                         .build()
-//                Route.builder()
-//                        .page(AcademicPlanPage.class)
-//                        .name("Учебный план")
-//                        .build(),
-//
-//                Route.builder()
-//                        .page(DepartmentsPage.class)
-//                        .name("Кафедры")
-//                        .build(),
-//
-//                Route.builder()
-//                        .page(GroupsPage.class)
-//                        .name("Классы")
-//                        .build(),
-//
-//                Route.builder()
-//                        .page(CoursesPage.class)
-//                        .name("Дисциплины")
-//                        .build(),
-//
-//                Route.builder()
-//                        .page(StudentsPage.class)
-//                        .name("Ученики")
-//                        .build(),
-//
-//                Route.builder()
-//                        .page(TeachersPage.class)
-//                        .name("Учителя")
-//                        .build()
         ));
 
         routes.put(Role.USER, List.of(
@@ -53,6 +24,10 @@ public class Router {
 //                        .page(StudentCoursesPage.class)
 //                        .name("Забронированные")
 //                        .build()
+                Route.builder()
+                        .page(MainPage.class)
+                        .name("Главная")
+                        .build()
         ));
     }
 

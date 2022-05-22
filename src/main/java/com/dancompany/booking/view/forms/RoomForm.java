@@ -1,4 +1,4 @@
-package com.dancompany.booking.view;
+package com.dancompany.booking.view.forms;
 
 import com.dancompany.booking.model.dto.request.RoomRequest;
 import com.vaadin.flow.component.Component;
@@ -7,8 +7,6 @@ import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.datetimepicker.DateTimePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -16,12 +14,8 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
-import com.vaadin.flow.data.converter.LocalDateTimeToDateConverter;
-import com.vaadin.flow.data.converter.StringToIntegerConverter;
 import com.vaadin.flow.data.converter.StringToLongConverter;
 import com.vaadin.flow.shared.Registration;
-
-import java.util.List;
 
 public class RoomForm extends FormLayout {
     Binder<RoomRequest> binder = new BeanValidationBinder<>(RoomRequest.class);
@@ -31,7 +25,6 @@ public class RoomForm extends FormLayout {
     TextField priceForDay = new TextField("Цена за день");
     DateTimePicker  datePickerStart = new DateTimePicker ("Дата начала");
     DateTimePicker datePickerEnd = new DateTimePicker ("Дата конца");
-//    private HotelRoomPage hotelRoomPage;
 
     Button save = new Button("Сохранить");
     Button cancel = new Button("Закрыть");
@@ -45,12 +38,10 @@ public class RoomForm extends FormLayout {
                 .withConverter(
                         new StringToLongConverter( Long.valueOf( 0 ), "price is a number!" ) )
                 .bind( RoomRequest::getPriceForDay, RoomRequest::setPriceForDay );
-
         binder.forField( datePickerStart )
                 .bind( RoomRequest::getStartAllocationDateTime, RoomRequest::setStartAllocationDateTime );
         binder.forField( datePickerEnd )
                         .bind( RoomRequest::getEndAllocationDateTime, RoomRequest:: setEndAllocationDateTime);
-
         add(
                 name,
                 description,
@@ -60,7 +51,6 @@ public class RoomForm extends FormLayout {
                 createButtonsLayout()
         );
         binder.bindInstanceFields(this);
-
     }
 
     public void setEntity(RoomRequest roomRequest) {
@@ -120,6 +110,5 @@ public class RoomForm extends FormLayout {
                                                                   ComponentEventListener<T> listener) {
         return getEventBus().addListener(eventType, listener);
     }
-
 }
 

@@ -3,10 +3,13 @@ package com.dancompany.booking.view;
 import com.dancompany.booking.model.dto.response.RoomResponse;
 import com.dancompany.booking.service.RoomService;
 import com.dancompany.booking.view.components.RoomComponent;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 import javax.annotation.security.PermitAll;
 import java.util.List;
@@ -26,9 +29,11 @@ public class MainPage extends VerticalLayout {
         List<RoomResponse> responseList = roomService.getAll();
         for (RoomResponse response:
              responseList) {
-            horizontalLayout.add(new RoomComponent(response));
+            VerticalLayout component = new RoomComponent(response);
+            component.getStyle().set("border", "1px solid blue");
+            component.getStyle().set("border-radius", "5px");
+            horizontalLayout.add(component);
         }
-
         add(
                 horizontalLayout
         );

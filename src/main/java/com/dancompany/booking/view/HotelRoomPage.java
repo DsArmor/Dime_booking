@@ -1,20 +1,17 @@
 package com.dancompany.booking.view;
 
-import com.dancompany.booking.model.Hotel;
 import com.dancompany.booking.model.dto.request.RoomRequest;
 import com.dancompany.booking.model.dto.response.HotelResponse;
 import com.dancompany.booking.model.dto.response.RoomResponse;
 import com.dancompany.booking.security.AppUserSingleton;
-import com.dancompany.booking.service.BackpackerService;
 import com.dancompany.booking.service.HotelService;
 import com.dancompany.booking.service.RoomService;
+import com.dancompany.booking.view.forms.RoomForm;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import javax.annotation.security.RolesAllowed;

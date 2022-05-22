@@ -10,7 +10,10 @@ public class AppUserSingleton {
     public static AppUser getUser() {
         if (user == null) {
             Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            user = (AppUser) principal;
+            if (principal instanceof AppUser)
+                user = (AppUser) principal;
+            else
+                user = null;
             System.out.println(user);
         }
         return user;
