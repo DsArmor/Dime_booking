@@ -5,10 +5,13 @@ import { makeStyles } from "@mui/styles";
 import Grid from '@mui/material/Grid';
 import Room from "./../components/Room";
 import roomService from "../services/room.service";
+import FullRoom from "../components/FullRoom";
 
 function Rooms() {
 
 	const [posts, setPosts] = useState([]);
+	const [showItem, setShowItem] = useState(false);
+	const [fullRoom, setFullRoom] = useState({});
 
 	useEffect(() => {
 		fetchData();
@@ -20,18 +23,24 @@ function Rooms() {
 		console.log("posts: " + posts);
 	}
 
+	const onShowItem=(room) => {
+		setFullRoom(room);
+		setShowItem(!showItem);
+	}
+
 	return (
 		<div className="Rooms">
-		<NavBar/>
-			<Grid 
+			<NavBar/>
+			{!showItem && <Grid 
 				container
 				justifyContent="center"
 				spacing={3}
 				marginTop={2}>
 				{posts.map(post => 
-					<Room room={post} key={post.id}/>
+					<Room onShowItem={onShowItem} room={post} key={post.id}/>
 					)}
-			</Grid>
+			</Grid>}
+			{showItem && <FullRoom room={fullRoom}/>}
 		</div>
 	);
 }

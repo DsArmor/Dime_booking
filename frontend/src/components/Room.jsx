@@ -30,7 +30,7 @@ const Room = (props) => {
 			</Typography>
 		  </CardContent>
 		  <CardActions>
-		    <Button size="small" variant="outlined" >Learn More</Button>
+		    <Button size="small" variant="outlined" onClick={() => props.onShowItem(props.room)}>Learn More</Button>
 		  </CardActions>
 		</Card>
 	  </Grid>
