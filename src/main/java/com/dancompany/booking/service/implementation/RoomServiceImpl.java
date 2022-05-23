@@ -14,6 +14,7 @@ import com.dancompany.booking.repository.HotelRepository;
 import com.dancompany.booking.repository.RoomRepository;
 import com.dancompany.booking.service.RoomService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -58,7 +59,8 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public RoomResponse getById(Long id) {
-        return roomMapper.map(roomRepository.getById(id));
+        return roomMapper.map(roomRepository.findById(id)
+                .orElseThrow(() -> new UsernameNotFoundException("Incorrect user id")));
     }
 
     @Override
