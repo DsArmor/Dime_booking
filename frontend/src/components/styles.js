@@ -1,11 +1,11 @@
 export const navbarStyles = {
     drawer: {
-        width: 320,
+        width: 270,
         flexShrink: 0,
         '& .MuiDrawer-paper': {
-            width: 320,
+            width: 270,
             boxSizing: 'border-box',
-            backgroundColor: '#101F33',
+            backgroundColor: '#1D5BB4',
             color: 'rgba(255, 255, 255, 0.7)',
         },
         '& .Mui-selected': {

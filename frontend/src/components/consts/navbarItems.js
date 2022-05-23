@@ -5,41 +5,47 @@ import SettingsEthernetIcon from '@mui/icons-material/SettingsEthernet';
 import SettingsInputComponentIcon from '@mui/icons-material/SettingsInputComponent';
 import DnsIcon from '@mui/icons-material/Dns';
 
-export const mainNavbarItems = [
-    {
-        id: 0,
-        icon: <PeopleIcon />,
-        label: 'Authentication',
-        route: 'authentication',
-    },
-    {
-        id: 1,
-        icon: <DnsIcon />,
-        label: 'Database',
-        route: 'database',
-    },
-    {
-        id: 2,
-        icon: <ImageIcon />,
-        label: 'Storage',
-        route: 'storage',
-    },
-    {
-        id: 3,
-        icon: <PublicIcon />,
-        label: 'Hosting',
-        route: 'hosting',
-    },
-    {
-        id: 4,
-        icon: <SettingsEthernetIcon />,
-        label: 'Functions',
-        route: 'functions',
-    },
-    {
-        id: 5,
-        icon: <SettingsInputComponentIcon />,
-        label: 'Machine learning',
-        route: 'machine-learning',
-    },
+const mainNavbarItems = [
+
+	{
+		id: 0,
+		icon: <PeopleIcon />,
+		label: 'Войти',
+		route: '/',
+	},
+	{
+		id: 1,
+		icon: <ImageIcon />,
+		label: 'Комнаты',
+		route: '/room',
+	},
 ]
+
+function addItems() {
+
+	const role = JSON.parse(localStorage.getItem("role"));
+
+	const booking = {
+		id: 3,
+		icon: <PublicIcon />,
+		label: 'Бронирования',
+		route: '/booking',
+	}
+	const hotelRooms = {
+		id: 3,
+		icon: <ImageIcon />,
+		label: 'Мои комнаты',
+		route: '/hotel-rooms',
+	}
+
+	if (role == "USER") {
+		mainNavbarItems.push(booking);
+	}
+	if (role == "HOTEL") {
+		mainNavbarItems.push(hotelRooms);
+	}
+}
+
+addItems();
+
+export { mainNavbarItems };

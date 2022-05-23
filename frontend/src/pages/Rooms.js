@@ -6,6 +6,13 @@ import Grid from '@mui/material/Grid';
 import Room from "./../components/Room";
 import roomService from "../services/room.service";
 import FullRoom from "../components/FullRoom";
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import { Typography } from "@mui/material";
+
+const theme = createTheme();
 
 function Rooms() {
 
@@ -29,23 +36,34 @@ function Rooms() {
 	}
 
 	return (
-		<div className="Rooms">
-			<NavBar/>
-			{!showItem && <Grid 
-				container
-				justifyContent="center"
-				spacing={3}
-				marginTop={2}>
-				{posts.map(post => 
-					<Room onShowItem={onShowItem} room={post} key={post.id}/>
-					)}
-			</Grid>}
+		<ThemeProvider theme={theme}>
+		<Container component="main" maxWidth="700" sx={{
+				marginLeft: 35,
+				alignItems: 'center',
+			}}>
+		  <CssBaseline />
+			{!showItem && 
+				<div>
+					<Typography variant="h3" color="text.secondary" marginTop={1} align="center">
+						Доступные комнаты
+					</Typography>
+					<Grid 
+						container
+						justifyContent="center"
+						spacing={4}
+						marginTop={2}>
+						{posts.map(post => 
+							<Room onShowItem={onShowItem} room={post} key={post.id}/>
+						)}
+					</Grid>
+				</div>}
 			{showItem && 
 			<div style={{marginLeft: "auto", marginRight: "auto", margin: "20px"}}>
 				<FullRoom room={fullRoom} onShowItem={onShowItem}/>
 			</div>}
-		</div>
-	);
+			</Container>
+    	</ThemeProvider>
+	)
 }
 
 export default Rooms;

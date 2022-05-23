@@ -13,16 +13,16 @@ import Rooms from './pages/Rooms';
 import Bookings from './pages/Bookings';
 
 ReactDOM.render(
-    <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />}>
-        <Route path="/login" element={<SignIn />} />
-        <Route path="/room" element={<Rooms />} />
-        <Route path="/booking" element={<Bookings />} />
-      </Route>
-    </Routes>
-  </BrowserRouter>,
-  document.getElementById('root')
+		<BrowserRouter>
+		<Routes>
+			<Route path="/" element={<App />}>
+				<Route path="/" element={<SignIn />} />
+				<Route path="/room" element={<Rooms />} />
+				<Route path="/booking" element={<Bookings />} />
+			</Route>
+		</Routes>
+	</BrowserRouter>,
+	document.getElementById('root')
 );
 
 // import React from "react";
