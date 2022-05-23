@@ -1,5 +1,6 @@
 package com.dancompany.booking.jwt;
 
+import com.dancompany.booking.auth.AppUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import lombok.SneakyThrows;
@@ -74,7 +75,10 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        out.print("{\"accessToken\": \"" + token + "\"}");
+        out.print("{\"accessToken\": \"" + token + "\",");
+        out.print("\"role\": \"" + ((AppUser) authResult.getPrincipal()).getAppRole() + "\",");
+        out.print("\"id\": \"" + ((AppUser) authResult.getPrincipal()).getId() + "\"}");
+        System.out.println(out);
         out.flush();
     }
 }

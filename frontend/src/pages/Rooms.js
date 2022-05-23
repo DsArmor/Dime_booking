@@ -40,7 +40,10 @@ function Rooms() {
 					<Room onShowItem={onShowItem} room={post} key={post.id}/>
 					)}
 			</Grid>}
-			{showItem && <FullRoom room={fullRoom}/>}
+			{showItem && 
+			<div style={{marginLeft: "auto", marginRight: "auto", margin: "20px"}}>
+				<FullRoom room={fullRoom} onShowItem={onShowItem}/>
+			</div>}
 		</div>
 	);
 }

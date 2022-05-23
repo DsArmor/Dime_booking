@@ -5,8 +5,13 @@ import NavBar from "./components/NavBar";
 import authService from "./services/auth.service";
 import SignIn from "./pages/SignIn";
 import Rooms from "./pages/Rooms";
+import Bookings from "./pages/Bookings"
 import { AppBar } from "@mui/material";
 import { Container } from "@mui/system";
+import React from 'react';
+import Navbar from './components/NavBar';
+import { Outlet } from "react-router-dom";
+import Grid from '@mui/material/Grid';
 
 // import Signup from "./components/Signup";
 // import Home from "./components/Home";
@@ -28,14 +33,10 @@ function App() {
   };
 
   return (
-	<div className="App">
-		<BrowserRouter>
-		<Routes>
-				<Route path="/" element={<SignIn />} />
-				<Route path="/room" element={<Rooms />} />
-			</Routes>
-		</BrowserRouter>
-	</div>
+    <Grid container>
+      <Navbar />
+      <Outlet />
+    </Grid>
   );
 }
 
