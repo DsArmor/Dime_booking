@@ -1,4 +1,3 @@
-import NavBar from "./NavBar";
 import React,{ useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -24,11 +23,12 @@ const FullRoom = (props) => {
 	const [formErrors, setFormErrors] = useState({});
 
 	const navigate = useNavigate();
+	const role = JSON.parse(localStorage.getItem("role"));
 
 	const validate = (values) => {
 		const errors = {};
 		errors.server = values;
-		errors.message = "Date are busy now";
+		errors.message = "На данный период забронировано";
 		return errors;
 	}
 
@@ -92,45 +92,48 @@ const FullRoom = (props) => {
 			</Card>
 				</Card>
 				<Grid item style={{marginLeft: 40}}>
-				<Box component="form" onSubmit={handleBooking} sx={{ mt: 1 }}>
-				<LocalizationProvider dateAdapter={AdapterDateFns}>
-				<Stack spacing={3}>
-					<DateTimePicker
-						renderInput={(props) => <TextField {...props} />}
-						label="Начало бронирования"
-						value={start}
-						onChange={(newValue) => {
-						  setStart(newValue);
-						}}
-					/>
-					<DateTimePicker
-						renderInput={(props) => <TextField {...props} />}
-						label="Конец бронирования"
-						value={end}
-						onChange={(newValue) => {
-						  setEnd(newValue);
-						}}
-					/>
-				</Stack>
-				</LocalizationProvider>
-				<Typography sx= {{color: "red"}}> { formErrors.message } </Typography>
-				<Button
-				  type="submit"
-				  fullWidth
-				  variant="contained"
-				  sx={{ mt: 3, mb: 2 }}
-				>
-					Забронировать
-				</Button>
-				<Button
-					onClick={() => props.onShowItem(props.room)}
-					fullWidth
-					variant="contained"
-					sx={{ mt: 3, mb: 2 }}
-				>
-					Закрыть
-				</Button>
-			</Box>
+				{role == "USER" && 
+					<Box component="form" onSubmit={handleBooking} sx={{ mt: 1 }}>
+					<LocalizationProvider dateAdapter={AdapterDateFns}>
+					<Stack spacing={3}>
+						<DateTimePicker
+							renderInput={(props) => <TextField {...props} />}
+							label="Начало бронирования"
+							value={start}
+							onChange={(newValue) => {
+							  setStart(newValue);
+							}}
+						/>
+						<DateTimePicker
+							renderInput={(props) => <TextField {...props} />}
+							label="Конец бронирования"
+							value={end}
+							onChange={(newValue) => {
+							  setEnd(newValue);
+							}}
+						/>
+					</Stack>
+					</LocalizationProvider>
+					<Typography sx= {{color: "red"}}> { formErrors.message } </Typography>
+					<Button
+					  type="submit"
+					  fullWidth
+					  variant="contained"
+					  sx={{ mt: 3, mb: 2 }}
+					>
+						Забронировать
+					</Button>
+					</Box>}
+				<Box>
+					<Button
+						onClick={() => props.onShowItem(props.room)}
+						fullWidth
+						variant="contained"
+						sx={{ mt: 3, mb: 2 }}
+					>
+						Закрыть
+					</Button>
+				</Box>
 				</Grid>
 			
 			</Grid>

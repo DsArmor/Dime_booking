@@ -44,7 +44,7 @@ function Rooms() {
 		  <CssBaseline />
 			{!showItem && 
 				<div>
-					<Typography variant="h3" color="text.secondary" marginTop={1} align="center">
+					<Typography variant="h4" color="text.secondary" marginTop={1} align="center">
 						Доступные комнаты
 					</Typography>
 					<Grid 

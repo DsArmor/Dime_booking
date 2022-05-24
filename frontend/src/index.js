@@ -11,6 +11,7 @@ import {
 import SignIn from './pages/SignIn';
 import Rooms from './pages/Rooms';
 import Bookings from './pages/Bookings';
+import HotelRooms from './pages/HotelRooms';
 
 ReactDOM.render(
 		<BrowserRouter>
@@ -19,6 +20,7 @@ ReactDOM.render(
 				<Route path="/" element={<SignIn />} />
 				<Route path="/room" element={<Rooms />} />
 				<Route path="/booking" element={<Bookings />} />
+				<Route path="/hotel-rooms" element={<HotelRooms />} />
 			</Route>
 		</Routes>
 	</BrowserRouter>,

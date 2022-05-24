@@ -36,6 +36,9 @@ public class RoomServiceImpl implements RoomService {
     public Long createRoom(Long hotelId, RoomRequest roomRequest) {
         if (roomRepository.existsRoomByNameAndOwnerId(roomRequest.getName(), hotelId))
             throw new BadRequestException("This name is exists");
+        System.out.println(roomRequest.getPriceForDay());
+        System.out.println(roomRequest.getStartAllocationDateTime());
+        System.out.println(roomRequest.getEndAllocationDateTime());
         Room room = roomMapper.map(roomRequest, hotelRepository.getById(hotelId));
         roomRepository.save(room);
         return room.getId();

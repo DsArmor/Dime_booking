@@ -9,7 +9,12 @@ import { useState } from "react";
 import FullRoom from "../components/FullRoom";
 import bookingService from "../services/booking.service";
 import Booking from "../components/Booking";
-import { Paper } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+
+const theme = createTheme();
 
 function Rooms() {
 
@@ -33,10 +38,17 @@ function Rooms() {
 	}
 
 	return (
-		<div className="Bookings">
-			<NavBar/>
-			{!showItem &&
+		<ThemeProvider theme={theme}>
+		<Container component="main" maxWidth="400" sx={{
+				marginLeft: 35,
+				alignItems: 'center',
+			}}>
+		  <CssBaseline />
+		  {!showItem &&
 				<Paper>
+					<Typography variant="h4" color="text.secondary" marginTop={1} align="center">
+						Ваши бронирования
+					</Typography>
 				<Table>
 				  <TableHead>
 					<TableRow>
@@ -56,7 +68,8 @@ function Rooms() {
 			<div style={{marginLeft: "auto", marginRight: "auto", margin: "20px"}}>
 				<FullRoom room={fullRoom} />
 			</div>}
-		</div>
+		</Container>
+    	</ThemeProvider>
 	);
 }
 
