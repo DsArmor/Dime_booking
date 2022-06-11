@@ -17,7 +17,7 @@
 
 Основные страницы приложения:
 
-### Главная:
+### Страница регистрации:
 <!-- ![image](https://user-images.githubusercontent.com/61008340/173174077-60000c80-f18b-419d-bfa2-165ca3a55225.png) -->
 <p align="center">
   <img src="https://user-images.githubusercontent.com/61008340/173174077-60000c80-f18b-419d-bfa2-165ca3a55225.png?raw=true" alt="Sublime's custom image"/>
